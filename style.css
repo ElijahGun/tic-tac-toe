@@ -1,0 +1,102 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+}
+
+:root {
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size) *.9);
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+    align-content: center;
+    height: 70vh;
+    width: 100vw;
+}
+
+.cell {
+    height: var(--cell-size);
+    width: var(--cell-size);
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(3n + 1) {
+    border-left: none;
+}
+
+.cell:nth-child(3n + 3) {
+    border-right: none;
+}
+
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9) {
+    border-bottom: none;
+}
+
+.cell.x::before,
+.cell.x::after {
+    content: '';
+    position: absolute;
+    background-color: black;
+    height: var(--mark-size);
+    width: calc(var(--mark-size)* .15);
+}
+
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board .cell:not(.x):not(.circle):hover::after  {
+    content: '';
+    position: absolute;
+    background-color: lightgray;
+    height: var(--mark-size);
+    width: calc(var(--mark-size)* .15);
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before {
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board .cell:not(.x):not(.circle):hover::after {
+    transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.cell.circle::after {
+    border-radius: 50%;
+}
+
+.cell.circle::before {
+    content: '';
+    position: absolute;
+    background-color: black;
+    height: var(--mark-size);
+    width: var(--mark-size);
+}
+
+.cell.circle::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+    height: calc(var(--mark-size)*.7);
+    width: calc(var(--mark-size)*.7);
+}
